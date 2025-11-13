@@ -17,9 +17,9 @@ public class TestController {
     @Value("${server.port}")
     private String serverPort;
 
-
-    @GetMapping("/test1")
+    @GetMapping("test1")
     public String test1() {
+
         return """
                 test1:%s,
                 test2:%s
@@ -32,16 +32,12 @@ public class TestController {
     }
 
     @GetMapping("test4/{id}")
-    public String test4(
-            @PathVariable("id") String id, @RequestParam(name = "num", required = false) Integer num
-    ){
-        return "%s, %s".formatted(id, num);
+    public String test4(@PathVariable("id") String id, @RequestParam(name="num", required = false) Integer num) {
+        return "%s,%s".formatted(id, num);
     }
 
     @PostMapping("test5")
-    public String test5(@RequestHeader(name="test-header1", required = false) String h1,
-                        @RequestHeader(name="test-header2", required = false) String h2
-    ){
-        return "%s, %s".formatted(h1, h2);
+    public String test5(@RequestHeader(name="test-header1", required = false) String h1, @RequestHeader(name="test-header2", required = false) String h2) {
+        return "%s,%s".formatted(h1, h2);
     }
 }
